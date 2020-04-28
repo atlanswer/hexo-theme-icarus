@@ -40,10 +40,15 @@ module.exports = class extends Component {
                 <article class={`card-content article${'direction' in page ? ' ' + page.direction : ''}`} role="article">
                     {page.layout !== 'page' ? <div class="article-meta size-small is-uppercase level is-mobile">
                         <div class="level-left">
+                            {/* Edited */}
+                            <i class="fas fa-edit" style="margin-right:0.25rem"></i>
+                            <time class="level-item" dateTime={date_xml(page.updated)} title={date_xml(page.updated)}>{date(page.updated)}</time>
                             {/* Date */}
+                            <i class="fas fa-pen" style="margin-right:0.25rem"></i>
                             <time class="level-item" dateTime={date_xml(page.date)} title={date_xml(page.date)}>{date(page.date)}</time>
                             {/* Categories */}
                             {page.categories && page.categories.length ? <span class="level-item">
+                                <i class="fas fa-folder-open" style="margin-right:0.25rem"></i>
                                 {(() => {
                                     const categories = [];
                                     page.categories.forEach((category, i) => {

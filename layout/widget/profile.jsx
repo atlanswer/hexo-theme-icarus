@@ -147,7 +147,7 @@ Profile.Cacheable = cacheComponent(Profile, 'widget.profile', props => {
                 url: url_for('/tags')
             }
         },
-        followLink: url_for(follow_link),
+        // followLink: url_for(follow_link),
         followTitle: __('widget.follow'),
         socialLinks
     };
