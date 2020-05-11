@@ -46,6 +46,8 @@ module.exports = class extends Component {
                             {/* Date */}
                             <i class="fas fa-pen" style="margin-right:0.25rem"></i>
                             <time class="level-item" dateTime={date_xml(page.date)} title={date_xml(page.date)}>{date(page.date)}</time>
+                            {/* author */}
+                            {page.author ? <span class="level-item"> {page.author} </span> : null}
                             {/* Categories */}
                             {page.categories && page.categories.length ? <span class="level-item">
                                 <i class="fas fa-folder-open" style="margin-right:0.25rem"></i>
