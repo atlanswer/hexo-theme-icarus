@@ -1,5 +1,6 @@
 const { Component } = require('inferno');
 const MetaTags = require('hexo-component-inferno/lib/view/misc/meta');
+const WebApp = require('hexo-component-inferno/lib/view/misc/web_app');
 const OpenGraph = require('hexo-component-inferno/lib/view/misc/open_graph');
 const StructuredData = require('hexo-component-inferno/lib/view/misc/structured_data');
 const Plugins = require('./plugins');
@@ -40,6 +41,7 @@ module.exports = class extends Component {
         } = config;
         const {
             meta = [],
+            manifest = {},
             open_graph = {},
             structured_data = {},
             canonical_url = page.permalink,
@@ -113,6 +115,13 @@ module.exports = class extends Component {
 
             <title>{getPageTitle(page, config.title, helper)}</title>
 
+            <WebApp.Cacheable
+                helper={helper}
+                favicon={favicon}
+                icons={manifest.icons}
+                themeColor={manifest.theme_color}
+                name={manifest.name || config.title} />
+
             {typeof open_graph === 'object' && open_graph !== null ? <OpenGraph
                 type={open_graph.type || (is_post(page) ? 'article' : 'website')}
                 title={open_graph.title || page.title || config.title}
@@ -133,10 +142,12 @@ module.exports = class extends Component {
                 facebookAppId={open_graph.fb_app_id} /> : null}
 
             {typeof structured_data === 'object' && structured_data !== null ? <StructuredData
-                title={structured_data.title || config.title}
+                title={structured_data.title || page.title || config.title}
                 description={structured_data.description || page.description || page.excerpt || page.content || config.description}
                 url={structured_data.url || page.permalink || url}
                 author={structured_data.author || config.author}
+                publisher={structured_data.publisher || config.title}
+                publisherLogo={structured_data.publisher_logo || config.logo}
                 date={page.date}
                 updated={page.updated}
                 images={structuredImages} /> : null}
